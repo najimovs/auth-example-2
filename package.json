@@ -1,0 +1,19 @@
+{
+	"name": "auth-example-2",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"dev": "node --watch --env-file=.env index.js",
+		"strat": "node --env-file=.env index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.19.0",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^5.2.1"
+	}
+}
