@@ -1,5 +1,8 @@
 import express from "express"
 import cors from "cors"
+import { readFile } from "node:fs/promises"
+
+const users = JSON.parse( await readFile( "./users.json", "utf8" ) )
 
 const PORT = process.env.PORT
 const app = express()
@@ -11,21 +14,28 @@ app.post( "/login", ( req, res ) => {
 
 	const { username, password } = req.body
 
-	console.log( username )
-
 	if ( !username || !password ) {
 
 		res.status( 400 ).send( { message: "`username` and `password` must include body" } )
 	}
 
-	if ( username === "tolmas" && password === "abc" ) {
+	if ( !users[ username ] ) {
 
-		res.send( { success: true } )
-	}
-	else {
+		res.status( 401 ).send( { message: `${ username } not found` } )
 
-		res.status( 401 ).send( { success: false, } )
+		return
 	}
+
+	const user = users[ username ]
+
+	if ( user.password !== password ) {
+
+		res.status( 401 ).send( { message: `Wrong password` } )
+
+		return
+	}
+
+	res.send( { ok: true } )
 } )
 
 app.listen( PORT, () => console.log( PORT ) )
