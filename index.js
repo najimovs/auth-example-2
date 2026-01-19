@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { readFile } from "node:fs/promises"
-import md5 from "md5"
+import bcrypt from "bcrypt"
 
 const users = JSON.parse( await readFile( "./users.json", "utf8" ) )
 
@@ -11,7 +11,7 @@ const app = express()
 app.use( express.json() )
 app.use( cors() )
 
-app.post( "/login", ( req, res ) => {
+app.post( "/login", async ( req, res ) => {
 
 	const { username, password } = req.body
 
@@ -29,7 +29,9 @@ app.post( "/login", ( req, res ) => {
 
 	const user = users[ username ]
 
-	if ( user.password !== md5( password ) ) {
+	const isValid = await bcrypt.compare( password, user.password )
+
+	if ( !isValid ) {
 
 		res.status( 401 ).send( { message: `Wrong password` } )
 
@@ -40,3 +42,10 @@ app.post( "/login", ( req, res ) => {
 } )
 
 app.listen( PORT, () => console.log( PORT ) )
+
+//
+
+async function hashPassword( plainPassword ) {
+
+	return await bcrypt.hash( plainPassword, 10 )
+}

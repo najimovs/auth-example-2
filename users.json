@@ -1,16 +1,16 @@
 {
 	"tolmas": {
-		"password": "900150983cd24fb0d6963f7d28e17f72",
+		"password": "$2b$10$CzeXrAfOL9N0f7a5hsGZ/e/WtFBaT44WANTpox2OCMpw0xbmXiHym",
 		"age": 1,
 		"gender": "male"
 	},
 	"javlon": {
-		"password": "202cb962ac59075b964b07152d234b70",
+		"password": "$2b$10$CzeXrAfOL9N0f7a5hsGZ/e/WtFBaT44WANTpox2OCMpw0xbmXiHym",
 		"age": 22,
 		"gender": "male"
 	},
 	"gulnoza": {
-		"password": "248e844336797ec98478f85e7626de4a",
+		"password": "$2b$10$CzeXrAfOL9N0f7a5hsGZ/e/WtFBaT44WANTpox2OCMpw0xbmXiHym",
 		"age": 122,
 		"gender": "female"
 	}
