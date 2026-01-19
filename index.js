@@ -38,7 +38,7 @@ app.post( "/login", async ( req, res ) => {
 		return
 	}
 
-	res.send( { ok: true } )
+	res.send( { username } )
 } )
 
 app.listen( PORT, () => console.log( PORT ) )
