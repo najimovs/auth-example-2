@@ -2,8 +2,10 @@ import "./main.css"
 
 const homeElement = document.getElementById( "home" )
 const whoAmIElement = document.getElementById( "whoAmI" )
+const logoutBtnElement = document.getElementById( "logoutBtn" )
 
 const loginElement = document.getElementById( "login" )
+const errorMsgElement = document.getElementById( "errorMsg" )
 const usernameElement = document.getElementById( "username" )
 const passwordElement = document.getElementById( "password" )
 
@@ -22,7 +24,14 @@ function init() {
 
 		const { username } = JSON.parse( localStorage.getItem( "app_user" ) )
 
-		whoAmIElement.textContent = username
+		whoAmIElement.textContent = username.toUpperCase()[ 0 ] + username.substr( 1 )
+
+		logoutBtnElement.onclick = () => {
+
+			localStorage.removeItem( "app_user" )
+
+			location.href = "/login"
+		}
 	}
 	else if ( location.pathname === "/login" ) {
 
@@ -68,7 +77,7 @@ loginElement.onsubmit = async e => {
 	}
 	catch( error ) {
 
-		console.log( error )
+		errorMsgElement.textContent = error
 	}
 }
 

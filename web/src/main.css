@@ -4,8 +4,10 @@
 
 #home {
 	display: none;
+	flex-direction: column;
 }
 
 #login {
 	display: none;
+	flex-direction: column;
 }

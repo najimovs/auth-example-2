@@ -9,8 +9,10 @@
 	<body>
 		<div id="home">
 			<h1>Welcome, <span id="whoAmI">Guest</span>!</h1>
+			<button id="logoutBtn">Logout</button>
 		</div>
 		<form id="login">
+			<p id="errorMsg"></p>
 			<input type="username" id="username" minlength="2" required autocomplete="username">
 			<input type="password" id="password" minlength="4" required autocomplete="password">
 			<button>Login</button>
