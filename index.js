@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { readFile } from "node:fs/promises"
+import md5 from "md5"
 
 const users = JSON.parse( await readFile( "./users.json", "utf8" ) )
 
@@ -28,7 +29,7 @@ app.post( "/login", ( req, res ) => {
 
 	const user = users[ username ]
 
-	if ( user.password !== password ) {
+	if ( user.password !== md5( password ) ) {
 
 		res.status( 401 ).send( { message: `Wrong password` } )
 

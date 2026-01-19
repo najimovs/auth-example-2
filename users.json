@@ -1,16 +1,16 @@
 {
 	"tolmas": {
-		"password": "abc",
+		"password": "900150983cd24fb0d6963f7d28e17f72",
 		"age": 1,
 		"gender": "male"
 	},
 	"javlon": {
-		"password": "123",
+		"password": "202cb962ac59075b964b07152d234b70",
 		"age": 22,
 		"gender": "male"
 	},
 	"gulnoza": {
-		"password": "432",
+		"password": "248e844336797ec98478f85e7626de4a",
 		"age": 122,
 		"gender": "female"
 	}
