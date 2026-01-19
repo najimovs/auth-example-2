@@ -1,8 +1,41 @@
 import "./main.css"
 
+const homeElement = document.getElementById( "home" )
+const whoAmIElement = document.getElementById( "whoAmI" )
+
 const loginElement = document.getElementById( "login" )
 const usernameElement = document.getElementById( "username" )
 const passwordElement = document.getElementById( "password" )
+
+init()
+
+function init() {
+
+	if ( location.pathname === "/" ) {
+
+		if ( !localStorage.getItem( "app_user" ) ) {
+
+			location.href = "/login"
+		}
+
+		homeElement.style.display = "flex"
+
+		const { username } = JSON.parse( localStorage.getItem( "app_user" ) )
+
+		whoAmIElement.textContent = username
+	}
+	else if ( location.pathname === "/login" ) {
+
+		if ( localStorage.getItem( "app_user" ) ) {
+
+			location.href = "/"
+
+			return
+		}
+
+		loginElement.style.display = "flex"
+	}
+}
 
 loginElement.onsubmit = async e => {
 
@@ -29,7 +62,9 @@ loginElement.onsubmit = async e => {
 
 		const user = await makeLogin( { username, password } )
 
-		console.log( "Successfull:", user.username )
+		localStorage.setItem( "app_user", JSON.stringify( user ) )
+
+		location.href = "/"
 	}
 	catch( error ) {
 

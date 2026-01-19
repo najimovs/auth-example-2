@@ -1,3 +1,11 @@
 :root {
 	color-scheme: dark only;
 }
+
+#home {
+	display: none;
+}
+
+#login {
+	display: none;
+}
