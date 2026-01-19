@@ -22,7 +22,7 @@ function init() {
 
 		homeElement.style.display = "flex"
 
-		const { username } = JSON.parse( localStorage.getItem( "app_user" ) )
+		const username = localStorage.getItem( "app_user" )
 
 		whoAmIElement.textContent = username.toUpperCase()[ 0 ] + username.substr( 1 )
 
@@ -71,7 +71,8 @@ loginElement.onsubmit = async e => {
 
 		const user = await makeLogin( { username, password } )
 
-		localStorage.setItem( "app_user", JSON.stringify( user ) )
+		localStorage.setItem( "app_user", user.username )
+		localStorage.setItem( "app_token", user.token )
 
 		location.href = "/"
 	}

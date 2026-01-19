@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import { readFile } from "node:fs/promises"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 
 const users = JSON.parse( await readFile( "./users.json", "utf8" ) )
 
@@ -38,7 +39,9 @@ app.post( "/login", async ( req, res ) => {
 		return
 	}
 
-	res.send( { username } )
+	const token = jwt.sign( { username, isAdmin: true }, process.env.JWT_TOKEN )
+
+	res.send( { username, token } )
 } )
 
 app.listen( PORT, () => console.log( PORT ) )
