@@ -12,6 +12,38 @@ const app = express()
 app.use( express.json() )
 app.use( cors() )
 
+app.get( "/data", async ( req, res ) => {
+
+	if ( !req.headers.jwt_token ) {
+
+		res.status( 401 ).send( { message: "Unauthorized" } )
+
+		return
+	}
+
+	const token = req.headers.jwt_token
+
+	try {
+
+		const user = await jwt.verify( token, process.env.JWT_SECRET )
+
+		if ( user.isAdmin ) {
+
+			res.send( [ 1, 2, 3, 4 ] )
+		}
+		else {
+
+			res.send( [] )
+		}
+	}
+	catch( error ) {
+
+		res.status( 401 ).send( { message: error.message } )
+
+		console.log( error )
+	}
+} )
+
 app.post( "/login", async ( req, res ) => {
 
 	const { username, password } = req.body
@@ -39,7 +71,7 @@ app.post( "/login", async ( req, res ) => {
 		return
 	}
 
-	const token = jwt.sign( { username, isAdmin: true }, process.env.JWT_TOKEN )
+	const token = jwt.sign( { username, isAdmin: user.isAdmin }, process.env.JWT_SECRET )
 
 	res.send( { username, token } )
 } )

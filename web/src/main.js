@@ -11,7 +11,7 @@ const passwordElement = document.getElementById( "password" )
 
 init()
 
-function init() {
+async function init() {
 
 	if ( location.pathname === "/" ) {
 
@@ -29,9 +29,18 @@ function init() {
 		logoutBtnElement.onclick = () => {
 
 			localStorage.removeItem( "app_user" )
+			localStorage.removeItem( "app_token" )
 
 			location.href = "/login"
 		}
+
+		const response = await fetch( "http://localhost:3000/data", {
+			headers: {
+				"JWT_TOKEN": localStorage.getItem( "app_token" ),
+			}
+		} )
+
+		console.log( await response.json() )
 	}
 	else if ( location.pathname === "/login" ) {
 
